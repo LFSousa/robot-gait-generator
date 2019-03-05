@@ -32,7 +32,9 @@ Leg.prototype.draw = function(px, py){
     }
 
     //Normalizing
-    this.M1 = round(-B+this.O+180+90);
+    this.M1 = round(180+90-B+this.O);
+
+    text("M1: " + this.M1, 10,10);
 
     this.bones[0] = new Bone(this.color, this.centerX, height/2-h, -B + this.O, c);
     this.bones[1] = new Bone(this.color, this.centerX, height/2-h, - A + 180 -B + this.O, b);
@@ -40,8 +42,9 @@ Leg.prototype.draw = function(px, py){
     this.bones[3] = new Bone(this.color, this.centerX, height/2-h, A + 180 +B + this.O, b);
 
     //Normalizing
-    this.M2 = round(-this.bones[3].ang+90);
+    this.M2 = round(-this.bones[3].ang+A+180+90);
 
+    text("M2: " + this.M2, 10,30);
     this.bones[0].draw();
     this.bones[1].fix(this.bones[0]);
     this.bones[1].update();
