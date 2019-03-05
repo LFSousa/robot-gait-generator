@@ -11,25 +11,16 @@ Bone.prototype.fix = function(bone){
     this.fixed = bone;
 }
 
-Bone.prototype.follow = function(bone){
-    this.following = bone;
-}
-
 Bone.prototype.update = function(){
-    if(this.fixed) this.pos1 = this.fixed.pos2;
-    if(this.following){
 
-        var fi = 2*asin((r/R)*sin(angbet/2));
-        
-        this.ang = (this.id==3?-1:1)*(2*PI-angbet-fi)/2 + this.fixed.ang+PI;
-        // this.ang = (this.id==3?-1:1)*this.fixed.ang - PI + 1;
-        
-    }
+    if(this.fixed) this.pos1 = this.fixed.pos2;
     this.pos2 = createVector(this.pos1.x+this.length*cos(this.ang), this.pos1.y-this.length*sin(this.ang));
 }
+
 Bone.prototype.setAngle = function(ang){
     this.ang = ang;
 }
+
 Bone.prototype.draw = function(){
     fill(this.color);
     stroke(this.color);
