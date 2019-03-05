@@ -15,16 +15,17 @@ function setup(){
 }
 
 var steps = [];
-let speed = 10;
+let speed = 5;
 
 for(i = 0; i < 4; i++){
     steps[i] = {
         actual: 0,
+        mult: 1,
         get step(){
             if(this.actual < 180) {
-                this.actual += speed/2;
+                this.actual += speed*this.mult;
             } else {
-                this.actual += speed;
+                this.actual += speed*this.mult;
             }
             if(this.actual > 360) this.actual = 0;
             return this.actual;
@@ -36,13 +37,18 @@ for(i = 0; i < 4; i++){
 }
 
 let gaitTypes = {
-    'run': [0, 230, 50, 280],
-    'walk': [0, 160, 50, 210]
+    'run': [1, 0, 230, 50, 280],
+    'amble': [1, 0, 180, 40, 220],
+    'walk': [1, 0, 160, 80, 240],
+    'pace': [1.6, 0, 180, 0, 180],
+    'trot': [1.7, 0, 180, 180, 0],
+    'canter': [1.7, 0, 180, 0, 50]
 }
 
-let gaitType = 'run';
+let gaitType = 'pace';
 
-for(i=0;i<4;i++) steps[i].step = gaitTypes[gaitType][i];
+
+for(i=0;i<4;i++)steps[i].mult = gaitTypes[gaitType][0], steps[i].step = gaitTypes[gaitType][i+1];
 
 let he = 60;
 function makeEllipseGait(step){
